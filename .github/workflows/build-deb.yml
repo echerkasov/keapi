@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  Ubuntu-docker:
+    runs-on: [ubuntu-latest]
+      container: echerkasov/kbuild:test
+    steps:
+      - uses: actions/checkout@master
+      - name: Autoconf
+        run: autoreconf --install
+      - name: Configure
+        run: ./configure --prefix=/usr ${CONFIGURE_FLAGS}
+      - name: Build
+        run: make
