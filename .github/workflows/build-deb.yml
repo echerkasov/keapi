@@ -7,12 +7,8 @@ jobs:
   kbuild-docker:
     runs-on: "ubuntu-latest"
     container:
-        image: echerkasov/kbuild:test
+        image: echerkasov/kbuild:test2
     steps:
       - uses: actions/checkout@master
-      - name: Autoconf
-        run: autoreconf --install
-      - name: Configure
-        run: ./configure --prefix=/usr ${CONFIGURE_FLAGS}
-      - name: Build
-        run: make
+      - name: Build deb package for amd64
+        run: dpkg-buildpackage -rfakeroot -us -uc -tc -b
