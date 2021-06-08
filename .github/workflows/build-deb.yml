@@ -11,14 +11,14 @@ on:
 
 jobs:
   kbuild-docker:
-    runs-on: ubuntu-latest
-      container:
+    runs-on: "ubuntu-latest"
+    container:
         image: echerkasov/kbuild:test
-      steps:
-        - uses: actions/checkout@master
-        - name: Autoconf
-          run: autoreconf --install
-        - name: Configure
-          run: ./configure --prefix=/usr ${CONFIGURE_FLAGS}
-        - name: Build
-          run: make
+    steps:
+      - uses: actions/checkout@master
+      - name: Autoconf
+        run: autoreconf --install
+      - name: Configure
+        run: ./configure --prefix=/usr ${CONFIGURE_FLAGS}
+      - name: Build
+        run: make
