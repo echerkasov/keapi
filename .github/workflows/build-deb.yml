@@ -17,19 +17,19 @@ jobs:
       - name: Build deb package for amd64
         run: |
           dpkg-buildpackage -rfakeroot -us -uc -tc -b
-          cp ../libkeapi3*_amd64* $HOME/artifacts/amd64
+          cp ../libkeapi*_amd64* $HOME/artifacts/amd64
       - name: Build deb package for arm64
         run: |
           dpkg-buildpackage -rfakeroot -us -uc -tc -b -a arm64 -d
-          cp ../libkeapi3*_arm64* $HOME/artifacts/arm64
+          cp ../libkeapi*_arm64* $HOME/artifacts/arm64
       - name: Display structure of downloaded files
         run: |
           pwd
           ls -R ../
           ls -R ~/
       - name: Create archive with deb packages
-        run: tar czvf $HOME/debs.tar.gz $HOME/artifacts/
+        run: tar czvf debs.tar.gz -C ~/artifacts ./*
       - uses: actions/download-artifact@v2
         with:
           name: deb packages
-          path: $HOME/debs.tar.gz
+          path: debs.tar.gz
