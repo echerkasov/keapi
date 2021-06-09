@@ -12,8 +12,8 @@ jobs:
       - uses: actions/checkout@master
       - name: Prepare directory for artifacts
         run: |
-          mkdir -P $HOME/artifacts/amd64
-          mkdir -P $HOME/artifacts/arm64
+          mkdir -p $HOME/artifacts/amd64
+          mkdir -p $HOME/artifacts/arm64
       - name: Build deb package for amd64
         run: |
           dpkg-buildpackage -rfakeroot -us -uc -tc -b
