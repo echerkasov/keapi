@@ -28,8 +28,8 @@ jobs:
           ls -R ../
           ls -R ~/
       - name: Create archive with deb packages
-        run: tar czvf debs.tar.gz -C ~/artifacts ./*
+        run: tar czvf debs.tar.gz ~/artifacts/*
       - uses: actions/download-artifact@v2
         with:
           name: deb packages
-          path: debs.tar.gz
+          path: ~/artifacts
