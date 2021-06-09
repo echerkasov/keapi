@@ -14,8 +14,12 @@ jobs:
         run: dpkg-buildpackage -rfakeroot -us -uc -tc -b
       - name: Build deb package for arm64
         run: dpkg-buildpackage -rfakeroot -us -uc -tc -b -a arm64 -d
+      - name: Display structure of downloaded files
+        run: ls -R
+      - name: Display structure of downloaded files
+        run: ls -R ${{ github.workspace }}
       - name: Create archive with deb packages
-        run: tar czvf debs.tar.gz "libkeapi3*.deb" -C ../
+        run: tar czvf debs.tar.gz "../libkeapi3*.deb"
       - uses: actions/download-artifact@v2
         with:
           name: deb packages
