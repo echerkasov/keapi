@@ -26,3 +26,12 @@ jobs:
         with:
           name: deb packages
           path: ~/artifacts/
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          draft: true
+          prerelease: false
+          files: |
+            ~/artifacts/amd64/*.deb
+            ~/artifacts/arm64/*.deb
