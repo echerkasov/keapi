@@ -12,20 +12,20 @@ jobs:
       - uses: actions/checkout@master
       - name: Prepare directory for artifacts
         run: |
-          mkdir -p ~/artifacts/amd64
-          mkdir -p ~/artifacts/arm64
+          mkdir -p artifacts/amd64
+          mkdir -p artifacts/arm64
       - name: Build deb package for amd64
         run: |
           dpkg-buildpackage -rfakeroot -us -uc -tc -b
-          cp ../libkeapi*_amd64* ~/artifacts/amd64
+          cp ../libkeapi*_amd64* artifacts/amd64
       - name: Build deb package for arm64
         run: |
           dpkg-buildpackage -rfakeroot -us -uc -tc -b -a arm64 -d
-          cp ../libkeapi*_arm64* ~/artifacts/arm64
+          cp ../libkeapi*_arm64* artifacts/arm64
       - uses: actions/upload-artifact@v2
         with:
           name: deb packages
-          path: ~/artifacts/
+          path: artifacts/
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -33,5 +33,5 @@ jobs:
           draft: true
           prerelease: false
           files: |
-            ~/artifacts/amd64/*.deb
-            ~/artifacts/arm64/*.deb
+            artifacts/amd64/*.deb
+            artifacts/arm64/*.deb
